@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 import './App.css';
 
-import { loadPosts } from './utils/loadPost';
+import { loadPosts } from './utils/load-post';
 import { Posts } from './components/Posts';
 
 // function App() {
