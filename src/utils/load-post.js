@@ -1,7 +1,8 @@
 export const loadPosts = async () => {
     //Faz uma requisição para a API de posts
     const postsResponse  = fetch('https://jsonplaceholder.typicode.com/posts');
-
+    
+    //Faz uma requisição para a API de photos
     const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
     
     // Aguarda a resolução das promessas
