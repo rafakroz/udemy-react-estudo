@@ -63,8 +63,8 @@ export class Home extends Component {
         <Posts posts={ posts } />
         <div className="button-container">
           <Button
-            text="Load more posts"
-            onClick={this.loadMorePosts}
+            text    ="Load more posts"
+            onClick ={this.loadMorePosts}
             disabled={noMorePosts}
           />
         </div>

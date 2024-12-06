@@ -11,8 +11,8 @@ export class Button extends Component {
         return (
             <button
                 className='button'
-                onClick={onClick}
-                disabled={disabled}
+                onClick  ={onClick}
+                disabled ={disabled}
             >
                 <span className='text-button'>{ text }</span>
             </button>
