@@ -6,6 +6,7 @@ import './styles.css';
 import { Posts }     from '../../components/Posts';
 import { loadPosts } from '../../utils/load-post';
 import { Button }    from '../../components/Button';
+import { TextInput } from '../../components/TextInput';
 
 export class Home extends Component {
   //
@@ -76,23 +77,22 @@ export class Home extends Component {
       //Componente
       <section className='container'>
         
-        {/* Se houver valor na busca o input é exibido */}
-        {!!searchValue && (
-          <>
-            <h2>
-              Search value: "{searchValue}" ({filteredPosts.length} result
-              {filteredPosts.length === 1 ? '' : 's'})
-            </h2>
-            <br />
-          </>
-        )}
+        <div className="search-container">
+          {/* Se houver valor na busca o input é exibido */}
+          {!!searchValue && (
+              <h2>
+                Search value: "{searchValue}" ({filteredPosts.length} result
+                {filteredPosts.length === 1 ? '' : 's'})
+              </h2>
+          )}
+          
+          <TextInput
+            searchValue={ searchValue }
+            handleChange={ this.handleChange }
+          />
+          
+        </div>
         
-        <input
-          onChange={this.handleChange}
-          value={ searchValue }
-          type="search" 
-        /><br /><br /><br />
-
         { filteredPosts.length > 0 && (
           <Posts posts={ filteredPosts } />
         )}

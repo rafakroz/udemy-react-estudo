@@ -12,6 +12,14 @@ h2 {
   margin-bottom: 8px;
 }
 
+.search-container {
+  margin-bottom: 28px;
+}
+
+.search-container h2 {
+  margin-bottom: 20px;
+}
+
 .button-container {
   min-height: 100px;
   display: flex;
