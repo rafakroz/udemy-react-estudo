@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 describe('<Button />', () => {
     //
     it('sould render the button with the text "Load more"', () => {
-        //
+        // #region Teste texto
         render(<Button text="Load more" />);
 
         // É esperado que haja a quantidade de inserções informada
@@ -22,7 +22,7 @@ describe('<Button />', () => {
     });
 
     it('sould call function on button click', () => {
-        //
+        // #region Teste fn clique
         const fn = jest.fn();
 
         render(<Button text="Load more" onClick={fn} />);
@@ -41,7 +41,7 @@ describe('<Button />', () => {
     });
 
     it('sould be disabled when disabled is true', () => {
-        //
+        // #region Teste btn disabled
         render(<Button text="Load more" disabled={true} />);
 
         // const button = screen.getByRole('button', { name: /load more/i });
@@ -65,7 +65,7 @@ describe('<Button />', () => {
     });
 
     it('sould be disabled when disabled is false', () => {
-        //
+        // #region Teste btn enabled
         render(<Button text="Load more" disabled={false} />);
 
         // É esperado que o botão esteja ativado
