@@ -9,7 +9,9 @@ import { Button }    from '../../components/Button';
 import { TextInput } from '../../components/TextInput';
 
 export class Home extends Component {
-  //
+
+  // #region State
+
   state = {
     posts: [],
     allPosts: [],
@@ -18,13 +20,17 @@ export class Home extends Component {
     searchValue: '',
   };
 
-  //Componente motado
+  // #region componentDidMount
+
   //Chamado automaticamente após o componente ser montado
   async componentDidMount() {
     await this.loadPosts();
   }
 
+  // #region loadPosts
+
   loadPosts = async () => {
+    //
     const { page, postsPerPage } = this.state;
     const postsAndPhotos         = await loadPosts();
 
@@ -34,13 +40,11 @@ export class Home extends Component {
     });
   }
 
+  // #region loadMorePosts
+
   loadMorePosts = () => {
-    const {
-      page,
-      postsPerPage,
-      allPosts,
-      posts
-    } = this.state;
+    //
+    const { page, postsPerPage, allPosts, posts } = this.state;
 
     const nextPage = page + postsPerPage;
 
@@ -54,12 +58,16 @@ export class Home extends Component {
     this.setState({ posts, page: nextPage });
   }
 
+  // #region handleChange
+
   handleChange = (e) => {
+    //
     const { value } = e.target;
 
     this.setState({ searchValue: value });
   }
 
+  // #region render()
   render() {
     const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
 
