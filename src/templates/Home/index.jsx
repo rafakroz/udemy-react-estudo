@@ -10,8 +10,7 @@ import { TextInput } from '../../components/TextInput';
 
 export const Home = () => {
   //
-  // #region State
-
+  
   //Configurando o estado/state
   const [posts, setPosts]               = useState([]);
   const [allPosts, setAllPost]          = useState([]);
@@ -21,7 +20,7 @@ export const Home = () => {
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
-  // #region filteredPosts
+  //Posts filtrados
 
   const filteredPosts = !!searchValue
   ? allPosts.filter(post => {
@@ -31,7 +30,7 @@ export const Home = () => {
     }) 
   : posts;
 
-  // #region handleLoadPosts
+  // Carregando os posts
 
   const handleLoadPosts = useCallback(async (page, postsPerPage) => {
     //
@@ -41,13 +40,13 @@ export const Home = () => {
     setAllPost(postsAndPhotos);
   }, [])
 
-  // #region useEffect()
+  // 
 
   useEffect(() => {
     handleLoadPosts(0, postsPerPage);
   }, [handleLoadPosts, postsPerPage]);
 
-  // #region loadMorePosts
+  // Carregar mais posts
 
   const loadMorePosts = () => {
     //
@@ -64,7 +63,7 @@ export const Home = () => {
     setPage(nextPage);
   }
 
-  // #region handleChange
+  // Monitora a mudança de valor
 
   const handleChange = (e) => {
     //
@@ -72,8 +71,6 @@ export const Home = () => {
 
     setSearchValue(value);
   }
-
-  // #region return()
 
   return (
     //Componente
