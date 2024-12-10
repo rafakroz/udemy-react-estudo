@@ -51,6 +51,14 @@ describe('<Posts />', () => {
         expect(screen.getAllByText(/body/i))
             .toHaveLength(3);
     });
+
+    /* Verificando se há um post vazio */
+    it('sould not render post', () => {
+        render(<Posts />)
+
+        expect(screen.queryByRole('heading', { name: /title/i }))
+            .not.toBeInTheDocument(0);
+    });
     
     it('sould match snapshot', () => {
         const { container } = render(<Posts {...props} />)
