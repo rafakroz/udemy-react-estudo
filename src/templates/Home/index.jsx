@@ -1,4 +1,6 @@
 // import logo from './logo.svg';
+import React from 'react';
+
 import { useEffect, useState, useCallback } from 'react';
 
 import './styles.css';
@@ -25,12 +27,12 @@ export const Home = () => {
   // #region filteredPosts
 
   //Posts filtrados
-  const filteredPosts = !!searchValue
+  const filteredPosts = searchValue
   ? allPosts.filter(post => {
       return post.title.toLowerCase().includes(
         searchValue.toLowerCase()
       );
-    }) 
+    })
   : posts;
 
   // #region handleLoadPosts
@@ -79,27 +81,27 @@ export const Home = () => {
   }
 
   // #region return
-  
+
   return (
     //Componente
     <section className='container'>
-      
+
       <div className="search-container">
         {/* Se houver valor na busca o input é exibido */}
         {!!searchValue && (
             <h2>
-              Search value: "{searchValue}" ({filteredPosts.length} result
+              Search value: &quot;{searchValue}&quot; ({filteredPosts.length} result
               {filteredPosts.length === 1 ? '' : 's'})
             </h2>
         )}
-        
+
         <TextInput
           searchValue={ searchValue }
           handleChange={ handleChange }
         />
-        
+
       </div>
-      
+
       { filteredPosts.length > 0 && (
         <Posts posts={ filteredPosts } />
       )}
