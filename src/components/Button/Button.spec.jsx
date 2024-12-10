@@ -74,4 +74,11 @@ describe('<Button />', () => {
             { name: /load more/i }
         )).toBeEnabled();
     });
+
+    it('sould match snapshot', () => {
+        // #region Snapshot do Button
+        const { container } = render(<Button text="Load more" disabled={false} />);
+
+        expect(container).toMatchSnapshot();
+    });
 });

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> sould match snapshot 1`] = `
+<div>
+  <button
+    class="button"
+  >
+    <span
+      class="text-button"
+    >
+      Load more
+    </span>
+  </button>
+</div>
+`;
