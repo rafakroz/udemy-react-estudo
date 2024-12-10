@@ -1,16 +1,68 @@
 ###----- ANOTAÇÕES -----###
 
-# Abrir o projeto localmente no navegador
+# Abrir o projeto localmente no navegador:
 npm start
 
-# Gerar uma build do projeto
+# Gerar uma build do projeto:
 npm build
 
-# Rodas testes no projeto
+# Rodas testes no projeto:
 npm test
 
-# Gerar o coverage do teste
-npm test -- --coverage           
+# Gerar o coverage do teste:
+npm test -- --coverage
 
-# Gerar o coverage de todos os testes
-npm test -- --watchAll="false" --coverage           
+# Gerar o coverage de todos os testes:
+npm test -- --watchAll="false" --coverage
+
+### Instalar ESLINT
+
+npx eslint --init
+
+Respostas:
+y
+✔ How would you like to use ESLint? · problems
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · javascript
+✔ Where does your code run? · browser, node
+✔ Would you like to install them now? · Yes
+Which package manager do you want to use? npm
+
+Remova o eslint das dependências do package.sjon
+
+Apague o arquivo package-lock.json e a pasta node_modulos
+
+E reinstala a biblioteca:
+npm i
+
+npm i -D prettier eslint-config-prettier eslint-plugin-prettier
+
+Criar o arquivo:
+.prettierrc.js
+
+Com as configurações:
+
+module.exports = {
+  semi: true,
+  trailingComma: 'all',
+  singleQuote: true,
+  printWidth: 120,
+  tabWidth: 2
+}
+
+# Efetuar as modificações automaticamente:
+npx eslint src/**/*.jsx --fix
+
+# Instalar Prop-types:
+npm i prop-types
+
+### prettier
+
+
+npm install --save-dev eslint-plugin-jest
+
+
+
+
+
