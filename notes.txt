@@ -1,0 +1,16 @@
+###----- ANOTAÇÕES -----###
+
+# Abrir o projeto localmente no navegador
+npm start
+
+# Gerar uma build do projeto
+npm build
+
+# Rodas testes no projeto
+npm test
+
+# Gerar o coverage do teste
+npm test -- --coverage           
+
+# Gerar o coverage de todos os testes
+npm test -- --watchAll="false" --coverage           
