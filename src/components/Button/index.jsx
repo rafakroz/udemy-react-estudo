@@ -1,3 +1,7 @@
+import React from 'react';
+
+import P from 'prop-types';
+
 import './styles.css';
 
 import { Component } from "react";
@@ -5,7 +9,7 @@ import { Component } from "react";
 export class Button extends Component {
     render() {
         //Obtendo o valor da propriedade text do button do arquivo da home
-        const { text, onClick, disabled } = this.props;
+        const { text, onClick, disabled = false } = this.props;
 
         //Inserindo o valor da propridade no botão em si
         return (
@@ -19,3 +23,15 @@ export class Button extends Component {
         );
     }
 }
+
+// Tipando as Props
+
+Button.defaultProps = {
+  disabled: false,
+}
+
+Button.propTypes = {
+  text:     P.string.isRequired,
+  onClick:  P.func.isRequired,
+  disabled: P.bool,
+};
