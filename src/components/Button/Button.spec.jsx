@@ -1,6 +1,10 @@
+import React from 'react';
+
 import { render, screen } from "@testing-library/react";
 import { Button } from ".";
 import userEvent from "@testing-library/user-event";
+
+const { describe, it, expect } = require('@jest/globals');
 
 describe('<Button />', () => {
     //
