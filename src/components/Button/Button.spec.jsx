@@ -88,6 +88,21 @@ describe('<Button />', () => {
         )).toBeEnabled();
     });
 
+    it('should be enabled when disabled prop is not provided', () => {
+      //
+      const fn = jest.fn();
+
+      // Renderiza o botão sem a prop disabled
+      render(<Button text="Load more" onClick={fn} />);
+
+      /* Verifica que o botão está habilitado,
+      porque o valor padrão de disabled é false */
+      expect(screen.getByRole(
+        'button',
+        { name: /load more/i }
+      )).toBeEnabled();
+    });
+
     // #region Snapshot do Button
     it('sould match snapshot', () => {
         //
