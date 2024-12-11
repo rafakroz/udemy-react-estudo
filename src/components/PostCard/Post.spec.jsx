@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { render, screen } from "@testing-library/react";
 import { PostCard } from ".";
 import { postCardPropsMock } from "./mock";
@@ -38,8 +40,8 @@ describe('<PostCard />', () => {
         expect(container).toMatchSnapshot();
 
         /* Caso seja preciso de fato modificar a estrutura do código, retirar ou
-        inserir campos e etc, será preciso atualizar o snapshot, pressionando a tecla u. 
+        inserir campos e etc, será preciso atualizar o snapshot, pressionando a tecla u.
         E deste ponto em diante, caso queira reverter a modificação do código, será preciso
         atualizar novamente o snapshot */
-    }); 
+    });
 });
