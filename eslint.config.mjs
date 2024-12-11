@@ -9,4 +9,11 @@ export default [
   {languageOptions: { globals: {...globals.browser, ...globals.node, ...globals.jest} }},
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    settings: {
+      react: {
+        version: "detect", // Automaticamente detecta a versão do React
+      },
+    },
+  },
 ];
