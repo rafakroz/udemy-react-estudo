@@ -9,7 +9,7 @@ import { Component } from "react";
 export class Button extends Component {
     render() {
         //Obtendo o valor da propriedade text do button do arquivo da home
-        const { text, onClick, disabled = false } = this.props;
+        const { text, onClick, disabled } = this.props;
 
         //Inserindo o valor da propridade no botão em si
         return (
@@ -25,6 +25,9 @@ export class Button extends Component {
 }
 
 // Tipando as Props
+
+/* Como o valor padrão está sendo passado na forma de 'destructuring', o
+defaultProps passa a ser desnecessário */
 
 Button.defaultProps = {
   disabled: false,
