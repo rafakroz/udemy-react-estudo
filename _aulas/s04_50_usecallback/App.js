@@ -10,6 +10,8 @@ O componente fica salvo na memória, e o componente só será re-renderizado nov
 se as suas props de incrementButton mudarem */
 const Button = React.memo(function Button({ incrementButton }) {
   console.log('Filho renderizado');
+  console.log('Carregando a pasta correta: 50');
+
 
   return <button onClick={() => incrementButton(1)}>+</button>;
 });
