@@ -4,6 +4,10 @@ import './App.css';
 
 /* HOOK */
 
+/* React.memo é uma função de ordem superior (HOC - Higher-Order Component)
+usada para otimizar a renderização de componentes.
+O componente fica salvo na memória, e o componente só será re-renderizado novamente
+se as suas props de incrementButton mudarem */
 const Button = React.memo(function Button({ incrementButton }) {
   console.log('Filho renderizado');
 
@@ -24,9 +28,9 @@ function App() {
   /* O useCallback vai 'salvar' a função e só usá-la quando a dependência mudar */
   const incrementCounter = useCallback((num) => {
     /* Quando não usamos counter, a função não tem dependência
-    Deste forma, o c, vai receber o valor de counter e será incrementado
-    normalmente. Como a função não dependende de counter, não será atualizada
-    no rendere, o usaCallback não chamará a função */
+    Deste forma, usando uma função de callBack, o c, vai receber o valor de counter
+    e será incrementado normalmente. Como a função não dependende de counter,
+    não será atualizada no rendere, o usaCallback não chamará a função */
     setCounter((c) => c + num);
   }, []);
 
