@@ -5,9 +5,9 @@ import { useEffect, useState, useCallback } from 'react';
 
 import './styles.css';
 
-import { Posts }     from '../../components/Posts';
+import { Posts } from '../../components/Posts';
 import { loadPosts } from '../../utils/load-post';
-import { Button }    from '../../components/Button';
+import { Button } from '../../components/Button';
 import { TextInput } from '../../components/TextInput';
 
 export const Home = () => {
@@ -16,11 +16,11 @@ export const Home = () => {
   // #region Config States
 
   //Configurando o estado/state
-  const [posts, setPosts]               = useState([]);
-  const [allPosts, setAllPost]          = useState([]);
-  const [page, setPage]                 = useState(0);
-  const [postsPerPage]                  = useState(10);
-  const [searchValue, setSearchValue]   = useState('');
+  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPost] = useState([]);
+  const [page, setPage] = useState(0);
+  const [postsPerPage] = useState(10);
+  const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
@@ -28,12 +28,10 @@ export const Home = () => {
 
   //Posts filtrados
   const filteredPosts = searchValue
-  ? allPosts.filter(post => {
-      return post.title.toLowerCase().includes(
-        searchValue.toLowerCase()
-      );
-    })
-  : posts;
+    ? allPosts.filter((post) => {
+        return post.title.toLowerCase().includes(searchValue.toLowerCase());
+      })
+    : posts;
 
   // #region handleLoadPosts
 
@@ -44,7 +42,7 @@ export const Home = () => {
 
     setPosts(postsAndPhotos.slice(page, postsPerPage)); //posts na página
     setAllPost(postsAndPhotos);
-  }, [])
+  }, []);
 
   // #region useEffect
 
@@ -68,7 +66,7 @@ export const Home = () => {
     //Alterando o state com os posts e a página com o novo valor
     setPosts(posts);
     setPage(nextPage);
-  }
+  };
 
   // #region handleChange
 
@@ -78,51 +76,40 @@ export const Home = () => {
     const { value } = e.target;
 
     setSearchValue(value);
-  }
+  };
 
   // #region return
 
   return (
     //Componente
-    <section className='container'>
-
+    <section className="container">
       <div className="search-container">
         {/* Se houver valor na busca o input é exibido */}
         {!!searchValue && (
-            <h2>
-              Search value: &quot;{searchValue}&quot; ({filteredPosts.length} result
-              {filteredPosts.length === 1 ? '' : 's'})
-            </h2>
+          <h2>
+            Search value: &quot;{searchValue}&quot; ({filteredPosts.length}{' '}
+            result
+            {filteredPosts.length === 1 ? '' : 's'})
+          </h2>
         )}
 
-        <TextInput
-          searchValue={ searchValue }
-          handleChange={ handleChange }
-        />
-
+        <TextInput searchValue={searchValue} handleChange={handleChange} />
       </div>
 
-      { filteredPosts.length > 0 && (
-        <Posts posts={ filteredPosts } />
-      )}
+      {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
 
-      { filteredPosts.length === 0 && (
-        <p>Não existem posts!</p>
-      )}
+      {filteredPosts.length === 0 && <p>Não existem posts!</p>}
 
       <div className="button-container">
-
         {/* Se não houver valor buscado, o button aparece */}
         {!searchValue && (
           <Button
-            text    ="Load more posts"
-            onClick ={ loadMorePosts }
-            disabled={ noMorePosts }
+            text="Load more posts"
+            onClick={loadMorePosts}
+            disabled={noMorePosts}
           />
         )}
-
       </div>
-
     </section>
   );
-}
+};
