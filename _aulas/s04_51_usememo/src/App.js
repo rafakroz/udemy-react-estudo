@@ -1,43 +1,67 @@
 import P from 'prop-types';
-import React, { useCallback, useState } from 'react';
 import './App.css';
+import { useEffect, useState, useMemo } from 'react';
 
-/* HOOK */
+/* O useCallback e useMemo tem praticamente o mesmo objetivo,
+no entanto, o React.memo (useMemo é a mesma coisa), guarda um componente,
+guarda valores */
 
-const Button = React.memo(function Button({ incrementButton }) {
-  console.log('Filho renderizado');
+//Componente do post
+const Post = ({ post }) => {
+  console.log('Filho renderizou');
+  return (
+    <div key={post.id} className="post">
+      <h2>{post.title}</h2>
+      <p>{post.body}</p>
+    </div>
+  );
+};
 
-  return <button onClick={() => incrementButton(1)}>+</button>;
-});
-
-Button.propTypes = {
-  incrementButton: P.func,
+//Tipando
+Post.propTypes = {
+  post: P.shape({
+    id: P.number,
+    title: P.string,
+    body: P.string,
+  }),
 };
 
 function App() {
-  /* O Componente vai renderizar sempre que o estado mudar */
-  const [counter, setCounter] = useState(0);
+  const [posts, setPosts] = useState([]);
+  const [value, setValue] = useState('');
 
-  /* Tudo que está dentro do componente é recriado toda que o mesmo
-  for renderizado */
+  console.log('Pai renderizou');
 
-  /* O useCallback vai 'salvar' a função e só usá-la quando a dependência mudar */
-  const incrementCounter = useCallback((num) => {
-    /* Quando não usamos counter, a função não tem dependência
-    Deste forma, o c, vai receber o valor de counter e será incrementado
-    normalmente. Como a função não dependende de counter, não será atualizada
-    no rendere, o usaCallback não chamará a função */
-    setCounter((c) => c + num);
+  //simulando componentdidMount
+  useEffect(() => {
+    setTimeout(function () {
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        //Convertendo para json
+        .then((r) => r.json())
+        //Pegando a resposta r e jogandop em SetPoasts
+        .then((r) => setPosts(r));
+    }, 4000);
   }, []);
 
-  console.log('Pai renderizado');
-
-  //
   return (
     <div className="App">
-      <p>useMemo</p>
-      <h2>Contador 1: {counter}</h2>
-      <Button incrementButton={incrementCounter} />
+      <p>
+        <input
+          type="search"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </p>
+      {/* useMemo para não renderizar os posts novamente */}
+      {useMemo(() => {
+        return (
+          posts.length > 0 &&
+          posts.map((post) => {
+            return <Post key={post.id} post={post} />;
+          })
+        );
+      }, [posts])}
+      {posts.length <= 0 && <p>Ainda não existem posts</p>}
     </div>
   );
 }
