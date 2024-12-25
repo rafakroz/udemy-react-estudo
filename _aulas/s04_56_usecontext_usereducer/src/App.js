@@ -1,105 +1,86 @@
 // import P from 'prop-types';
-import { useReducer } from 'react';
+import { createContext, useContext, useReducer, useRef } from 'react';
+import P from 'prop-types';
 import './App.css';
 
 /* useReducer
-É usado com estados mais complexos exigem uma lógica, sendo
-passada uma função (primeiro parâmetro) para dentro de useReducer,
-e o estado inicial (segundo parâmetro).
+ */
 
-A função dispatch é usada para disparar um "ação".
-(A função poderia qualquer nome, mas, dispatch é mais comum)
+// ----- actions.js -----
+export const actions = {
+  CHANGE_TITLE: 'CHANGE_TITLE',
+}
 
-Payload dentro do dispatch são os dados que serão enviados para dentro
-da função no reducer.
-
-Com o payload, num action de adicionar um produto no carrinho, seria
-possível passar o id do produto, por exemplo. */
-
-const globalState = {
-  title:  'Aula: useReducer',
+// ----- data.js -----
+export const globalState = {
+  title:  'Aula: useContext e useReducer',
   body:   'O body do Contexto',
   counter: 0,
 };
 
-/* A função reducer vai manipular o estado.
-Por padrão recebe 2 parâmetros: estado atual e uma action
-Retorna o estado novo / alterado */
-
-const reducer = (state, action) => {
+// ----- reducer.js -----
+export const reducer = (state, action) => {
   switch(action.type) {
-    case 'change': {
-      console.log('Chamou change com', action.payload);
-      return { ...state, title: action.payload};
-    }
-    case 'inverter': {
-      console.log('Chamou inverter');
-      const { title } = state;
-      return { ...state, title: title.split('').reverse().join('') };
+    case actions.CHANGE_TITLE: {
+      console.log('Mudar título');
+      return {...state, title: action.payload};
     }
     default: {
-      console.log(`Action type "${action.type}" não reconhecida.`);
-      return { ...state};
+      return {...state};
     }
   }
-};
+}
 
-function App() {
-  //
+// Componente de contexto
+export const Context = createContext();
+
+// ----- AppContext.jsx -----
+export const AppContext = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, globalState);
 
-  const {counter, title, body} = state;
-
-  const styles = {
-    btnChange: {
-      marginLeft: '2px',
-      marginRight: '5px'
-    },
-    btnInverter: {
-      marginRight: '5px'
-    },
-    btnOutro: {
-      marginRight: '5px'
-    },
-    textoBody: {
-      marginLeft: '2px',
-      color: 'blue'
-    }
+  const changeTitle = (payload) => {
+    dispatch({ type: actions.CHANGE_TITLE, payload })
   }
 
   return (
-    <div>
-      <h1>
-        { title } (i: {counter})
+    <Context.Provider value={{ state, changeTitle}}>
+      { children }
+    </Context.Provider>
+  );
+}
+
+// Componente com proptype
+// AppContext com children
+AppContext.propTypes = {
+  children: P.node,
+};
+
+// ----- H1 / index.jsx -----
+export const H1 = (props) => {
+  const context = useContext(Context);
+  // Referência do input, apenas para pegar o value
+  const inputRef = useRef();
+
+  return (
+    <>
+      <h1 onClick={() => context.changeTitle( inputRef.current.value )}>
+        { context.state.title }
       </h1>
 
-      <p style={styles.textoBody}>
-        {body}
-      </p>
+      <input type='text' ref={inputRef} />
+    </>
+  );
+}
 
-      <button
-        style={styles.btnChange}
-        onClick={() =>
-          dispatch({
-            type: 'change',
-            payload: new Date().toLocaleString('pt-BR'),
-          })
-        }
-        >Mudar
-      </button>
-
-      <button
-        style={styles.btnInverter}
-        onClick={() => dispatch({ type: 'inverter' })}
-        >Inverter
-      </button>
-
-      <button
-        style={styles.btnOutro}
-        onClick={() => dispatch({ type: 'outro' })}
-        >Indefinido
-      </button>
-    </div>
+// ----- App.jsx -----
+function App() {
+  //
+  return (
+    <AppContext>
+      <div>
+        <H1 />
+      </div>
+    </AppContext>
   );
 }
 
