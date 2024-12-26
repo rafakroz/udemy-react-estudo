@@ -61,13 +61,20 @@ export const H1 = (props) => {
   // Referência do input, apenas para pegar o value
   const inputRef = useRef();
 
+  const styles = {
+    inputInsert: {
+      marginLeft: '6px',
+      width: '120px'
+    }
+  }
+
   return (
     <>
       <h1 onClick={() => context.changeTitle( inputRef.current.value )}>
         { context.state.title }
       </h1>
 
-      <input type='text' ref={inputRef} />
+      <input type='text' ref={inputRef} style={ styles.inputInsert } />
     </>
   );
 }
